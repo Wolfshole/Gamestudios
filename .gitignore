@@ -1,0 +1,5 @@
+# Deependencies
+node_modules/
+
+# env files
+.env
