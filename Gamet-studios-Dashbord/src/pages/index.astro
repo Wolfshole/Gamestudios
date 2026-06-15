@@ -12,47 +12,60 @@ import CleanLayout from "../layouts/CleanLayout.astro";
         Wähle zu erst einen Server aus dem Dropdown-Menü auf der linken Seite aus, um die spezifischen Einstellungen und Module für diesen Server zu verwalten.
     </p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Webseite -->
-        <div class="bg-[#1e2937] border border-emerald-500/30 rounded-2xl p-6 hover:border-emerald-500 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                </div>
-                <div>
-                    <p class="font-semibold text-lg">Website</p>
-                    <p class="text-emerald-400 text-sm font-medium">Online</p>
-                </div>
+<!-- Status Karten -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+
+    <!-- Website -->
+    <div class="status-card">
+        <div class="status-content">
+            <div class="status-dot online">
+                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
+            </div>
+            <div>
+                <p class="status-text">Website</p>
+                <p class="status-subtext">Online</p>
             </div>
         </div>
     </div>
 
-    <!-- Dashbord -->
-
-    <div class="bg-[#1e2937] border border-emerald-500/30 rounded-2xl p-6 hover:border-emerald-500 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                </div>
-                <div>
-                    <p class="font-semibold text-lg">Dashboard</p>
-                    <p class="text-emerald-400 text-sm font-medium">Online</p>
-                </div>
+    <!-- Dashboard -->
+    <div class="status-card">
+        <div class="status-content">
+            <div class="status-dot online">
+                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
+            </div>
+            <div>
+                <p class="status-text">Dashboard</p>
+                <p class="status-subtext">Online</p>
             </div>
         </div>
+    </div>
 
-        <!-- Team-Dashbord -->
-
-        <div class="bg-[#1e2937] border border-emerald-500/30 rounded-2xl p-6 hover:border-emerald-500 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
-                </div>
-                <div>
-                    <p class="font-semibold text-lg">Team-Dashboard</p>
-                    <p class="text-emerald-400 text-sm font-medium">Comming soon</p> <!-- Fertig machen! -->
-                </div>
+    <!-- Team-Dashboard -->
+    <div class="status-card">
+        <div class="status-content">
+            <div class="status-dot online">
+                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
+            </div>
+            <div>
+                <p class="status-text">Team-Dashboard</p>
+                <p class="status-subtext">Online</p>
             </div>
         </div>
+    </div>
 
+    <!-- Status Informationen -->
+    <div class="status-card status-info">
+        <div class="status-content">
+            <div class="status-dot info">
+                <span class="text-white text-sm font-bold">i</span>
+            </div>
+            <div>
+                <p class="status-text">Status Informationen</p>
+                <p class="status-subtext info"><a href="/status" class="text-blue-400 hover:underline">Status</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
 </CleanLayout>

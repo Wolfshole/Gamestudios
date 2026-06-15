@@ -68,3 +68,118 @@ footer {
     padding: 16px;
     color: #fff;
 }
+
+/* Status Karten - wie im Bild */
+.status-card {
+    background-color: #1e2937;
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    border-radius: 16px;
+    padding: 20px 24px;
+    transition: all 0.3s ease;
+    min-height: 110px;
+}
+
+.status-card:hover {
+    border-color: rgb(52 211 153);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.status-card.status-info {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.status-card.status-info:hover {
+    border-color: rgb(59 130 246);
+}
+
+/* Innerer Inhalt */
+.status-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.status-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background-color: #10b981;
+    box-shadow: 0 0 12px #10b981;
+}
+
+.status-dot.info {
+    background-color: #3b82f6;
+}
+
+.status-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+}
+
+.status-subtext {
+    font-size: 14px;
+    color: #34d399;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* Für die Info-Karte */
+.status-subtext.info {
+    color: #60a5fa;
+}
+
+.status-card {
+    background-color: #1e2937;
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    transition: all 0.25s ease;
+    min-height: 92px;
+}
+
+.status-card:hover {
+    border-color: rgb(52 211 153);
+    transform: translateY(-3px);
+}
+
+.status-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background-color: #10b981;
+}
+
+.status-text {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+}
+
+.status-subtext {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 3px;
+}
