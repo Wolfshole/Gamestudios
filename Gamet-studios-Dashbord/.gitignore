@@ -34,3 +34,6 @@ public/
 .netlify
 netlify.toml
 
+# Prisma generated client
+prisma/
+prisma.config.ts

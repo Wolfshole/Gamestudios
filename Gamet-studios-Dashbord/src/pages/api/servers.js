@@ -1,13 +1,35 @@
-export async function GET() {
-  // Hier später echte Daten vom Bot / Datenbank holen
-  const servers = [
-    { id: "123456789", name: "Gaming Studio Main" },
-    { id: "987654321", name: "Test Server" },
-    { id: "111222333", name: "Community Server" }
-  ];
+export async function GET({ cookies, request }) {
+  const userCookie = cookies.get('discord_user')?.value;
 
-  return new Response(JSON.stringify(servers), {
-    status: 200,
-    headers: { "Content-Type": "application/json" }
-  });
+  if (!userCookie) {
+    return new Response(JSON.stringify({ error: 'Nicht eingeloggt' }), { 
+      status: 401 
+    });
+  }
+
+  const user = JSON.parse(userCookie);
+
+  try {
+    const guildsResponse = await fetch('https://discord.com/api/users/@me/guilds', {
+      headers: {
+        Authorization: `Bearer ${user.accessToken || ''}`,
+      }
+    });
+
+    if (!guildsResponse.ok) {
+      return new Response(JSON.stringify({ error: 'Token ungültig' }), { status: 401 });
+    }
+
+    const guilds = await guildsResponse.json();
+
+    return new Response(JSON.stringify(guilds), {
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
+
+  } catch (error) {
+    return new Response(JSON.stringify({ error: 'Fehler beim Abrufen der Server' }), { 
+      status: 500 
+    });
+  }
 }

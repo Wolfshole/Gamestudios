@@ -1,5 +1,11 @@
 ---
 import CleanLayout from '../layouts/CleanLayout.astro';
+
+// Wenn User schon eingeloggt ist, direkt zum Dashboard weiterleiten
+const userCookie = Astro.cookies.get('discord_user');
+if (userCookie) {
+  return Astro.redirect('/');
+}
 ---
 
 <CleanLayout title="Login - Gamet Studios">
@@ -33,3 +39,4 @@ import CleanLayout from '../layouts/CleanLayout.astro';
     </div>
 
 </CleanLayout>
+
