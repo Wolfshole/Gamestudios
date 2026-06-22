@@ -31,7 +31,7 @@ public/
 .vscode/
 
 # Local Netlify folder
-.netlify
+.netlify/
 netlify.toml
 
 # Prisma generated client
