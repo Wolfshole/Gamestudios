@@ -37,3 +37,6 @@ netlify.toml
 # Prisma generated client
 prisma/
 prisma.config.ts
+
+# Impressum
+/home/schule/Schreibtisch/Hostly/Gamet-studios-Bot/Gamet-studios-Dashbord/src/pages/impressum.astro

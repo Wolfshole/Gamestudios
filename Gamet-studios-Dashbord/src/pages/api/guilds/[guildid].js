@@ -1,6 +1,5 @@
 import prisma from '@/lib/prisma.js';
 
-// GET - Einstellungen eines Servers abrufen
 export async function GET({ params, cookies }) {
   const { guildId } = params;
   const userCookie = cookies.get('discord_user')?.value;
@@ -11,10 +10,15 @@ export async function GET({ params, cookies }) {
 
   try {
     const settings = await prisma.guildSettings.findUnique({
-      where: { guildId }
+      where: { guildId: guildId }
     });
 
-    return new Response(JSON.stringify(settings || { guildId, prefix: '!', welcomeChannel: null }), {
+    return new Response(JSON.stringify({
+      guildId,
+      prefix: settings?.prefix || '!',
+      welcomeChannel: settings?.welcomeChannel || null,
+      welcomeMessage: settings?.welcomeMessage || null,
+    }), {
       status: 200,
       headers: { "Content-Type": "application/json" }
     });
@@ -25,7 +29,6 @@ export async function GET({ params, cookies }) {
   }
 }
 
-// POST - Einstellungen eines Servers speichern
 export async function POST({ params, request, cookies }) {
   const { guildId } = params;
   const userCookie = cookies.get('discord_user')?.value;

@@ -1,25 +1,44 @@
 ---
-const { username = "Gast", avatar = "https://via.placeholder.com/128" } = Astro.props;
+const { username = "Gast", avatar = "https://via.placeholder.com/128" } =
+  Astro.props;
 ---
 
 <div class="relative" id="user-dropdown">
-  <button id="user-button" class="user-dropdown-button">
-    <img src={avatar} alt="Avatar" class="avatar">
-    <div class="user-info hidden sm:block">
-      <span class="username">{username}</span>
+  <button id="user-button" class="user-dropdown-button flex items-center gap-3">
+    <!-- Kleineres, rundes Profilbild -->
+    <img
+      src={avatar}
+      alt="Discord Avatar"
+      class="avatar w-9 h-9 rounded-full object-cover border border-slate-600"
+    />
+    <div class="user-info hidden sm:block text-left">
+      <span class="username text-sm font-medium">{username}</span>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="chevron w-4 h-4 text-gray-400"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"></path>
     </svg>
   </button>
 
   <div id="user-menu" class="user-menu hidden">
+    <a href="/profile" class="dropdown-item">👤 Mein Profil</a>
     <a href="/settings" class="dropdown-item">⚙️ Einstellungen</a>
-    <a href="/billing" class="dropdown-item">💰 Rechnungsdaten</a>
+    <a href="/modules" class="dropdown-item">📦 Meine Module</a>
     <div class="divider"></div>
-    <button onclick="handleLogout()" class="dropdown-item logout">⬅️ Abmelden</button>
+    <button onclick="handleLogout()" class="dropdown-item logout"
+      >⬅️ Abmelden</button
+    >
   </div>
 </div>
 
-<link rel="stylesheet" href="/styles/components/user-dropdown.css">
+<link rel="stylesheet" href="/styles/components/user-dropdown.css" />
 <script src="/scripts/user-dropdown.js" type="module"></script>
