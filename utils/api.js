@@ -1,35 +1,23 @@
-const axios = require('axios');
+const axios = require("axios");
 
-const DASHBOARD_URL = 'http://localhost:4321'; // später deine Domain
+const DASHBOARD_URL = process.env.DASHBOARD_URL || "http://localhost:4321";
 
-/**
- * Einstellungen eines Servers vom Dashboard abrufen
- */
-async function getGuildSettings(guildId) {
-  try {
-    const response = await axios.get(`${DASHBOARD_URL}/api/guilds/${guildId}`);
-    return response.data;
-  } catch (error) {
-    console.error(`[API] Fehler beim Abrufen von Guild ${guildId}:`, error.message);
-    return null;
-  }
-}
+console.log(`[API] Dashboard verbunden mit: ${DASHBOARD_URL}`);
 
 /**
- * Einstellungen eines Servers ans Dashboard senden
+ * Prüft, ob ein Command auf diesem Server aktiviert ist
  */
-async function updateGuildSettings(guildId, settings) {
+async function isCommandEnabled(guildId, commandName) {
   try {
-    const response = await axios.post(`${DASHBOARD_URL}/api/guilds/${guildId}`, settings);
-    console.log(`[API] Einstellungen für ${guildId} aktualisiert`);
-    return response.data;
+    const res = await axios.get(`${DASHBOARD_URL}/api/modules/${guildId}`);
+    const modules = res.data || {};
+    return modules[commandName] !== false; // Standardmäßig aktiviert
   } catch (error) {
-    console.error(`[API] Fehler beim Speichern von Guild ${guildId}:`, error.message);
-    return null;
+    console.warn(`[API] Konnte Modul-Status nicht abrufen (${commandName})`);
+    return true; // Bei Fehler Command aktiv lassen
   }
 }
 
 module.exports = {
-  getGuildSettings,
-  updateGuildSettings
+  isCommandEnabled,
 };

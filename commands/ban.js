@@ -1,59 +1,60 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  ModalBuilder,
-  TextInputBuilder,
-  TextInputStyle,
-  ActionRowBuilder,
-  PermissionFlagsBits,
-} = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+
+const { isCommandEnabled } = require("../utils/api");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ban")
-    .setDescription("Bannt einen Benutzer vom Server.")
+    .setDescription("Bannt einen Benutzer vom Server")
     .addUserOption((option) =>
       option
         .setName("user")
         .setDescription("Der Benutzer, den du bannen möchtest.")
         .setRequired(true),
     )
+    .addStringOption((option) =>
+      option
+        .setName("grund")
+        .setDescription("Grund für den Ban")
+        .setRequired(false),
+    )
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
   async execute(interaction) {
-    const user = interaction.options.getUser("user");
+    const guildId = interaction.guild.id;
 
-    if (
-      !interaction.member.permissions.has(PermissionFlagsBits.BanMembers) &&
-      interaction.user.id !== interaction.guild.ownerId
-    ) {
+    // API-Check: Ist der Command aktiviert?
+    const enabled = await isCommandEnabled(guildId, "ban");
+    if (!enabled) {
       return interaction.reply({
-        content:
-          'Du brauchst die Berechtigung "Mitglieder bannen", um diesen Befehl zu verwenden.',
+        content: "❌ Der `/ban` Command ist auf diesem Server deaktiviert.",
         ephemeral: true,
       });
     }
 
-    if (!user) {
+    // ... Rest deines Ban-Codes bleibt gleich ...
+    const target = interaction.options.getUser("user");
+    const reason =
+      interaction.options.getString("grund") || "Kein Grund angegeben";
+
+    if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) {
       return interaction.reply({
-        content: "Bitte gib einen gültigen Benutzer an.",
+        content: "Du hast keine Berechtigung für diesen Befehl!",
         ephemeral: true,
       });
     }
 
-    const modal = new ModalBuilder()
-      .setcustomId(`banModal-${user.id}`)
-      .setTitle(`Ban ${user.tag}`);
-
-    const reasonInput = new TextInputBilder()
-      .setCustomId("reasonInput")
-      .setLabel("Grund für den Ban")
-      .setStyle(TextInputStyle.Paragraph)
-      .setRequired(true);
-
-    const row = new ActionRowBuilder().addComponents(reasonInput);
-    modal.addComponents(row);
-
-    await interaction.showModal(modal);
+    try {
+      await interaction.guild.members.ban(target, { reason });
+      await interaction.reply({
+        content: `✅ ${target.tag} wurde gebannt.\n**Grund:** ${reason}`,
+        ephemeral: true,
+      });
+    } catch (error) {
+      await interaction.reply({
+        content: "❌ Ban fehlgeschlagen. Fehlende Berechtigungen?",
+        ephemeral: true,
+      });
+    }
   },
 };

@@ -3,71 +3,19 @@ import CleanLayout from "../layouts/CleanLayout.astro";
 ---
 
 <CleanLayout title="Dashboard">
-    <div class="mb-10">
-        <h2 class="text-3xl font-bold">Deine Server</h2>
-        <p class="text-slate-400">Wähle einen Server aus, den du verwalten möchtest</p>
-    </div>
+  <div class="mb-10">
+    <h2 class="text-3xl font-bold">Deine Server</h2>
+    <p class="text-slate-400">
+      Wähle einen Server aus, den du verwalten möchtest
+    </p>
+  </div>
 
-    <div id="servers-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Server-Karten werden hier per JavaScript eingefügt -->
-    </div>
-
-<!-- Status Karten -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-
-    <!-- Website -->
-    <div class="status-card">
-        <div class="status-content">
-            <div class="status-dot online">
-                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
-            </div>
-            <div>
-                <p class="status-text">Website</p>
-                <p class="status-subtext">Online</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dashboard -->
-    <div class="status-card">
-        <div class="status-content">
-            <div class="status-dot online">
-                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
-            </div>
-            <div>
-                <p class="status-text">Dashboard</p>
-                <p class="status-subtext">Online</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Team-Dashboard -->
-    <div class="status-card">
-        <div class="status-content">
-            <div class="status-dot online">
-                <div class="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
-            </div>
-            <div>
-                <p class="status-text">Team-Dashboard</p>
-                <p class="status-subtext">Coming Soon</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Status Informationen -->
-    <div class="status-card status-info">
-        <div class="status-content">
-            <div class="status-dot info">
-                <span class="text-white text-sm font-bold">i</span>
-            </div>
-            <div>
-                <p class="status-text">Status Informationen</p>
-                <p class="status-subtext info"><a href="/status" class="text-blue-400 hover:underline">Status</a></p>
-            </div>
-        </div>
-    </div>
-
-</div>
+  <div
+    id="servers-list"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  >
+    <!-- Wird per Script gefüllt -->
+  </div>
 </CleanLayout>
 
 <script src="/scripts/servers.js" type="module"></script>
